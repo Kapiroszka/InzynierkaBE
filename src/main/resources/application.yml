@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    jdbc-url: jdbc:postgresql://localhost:5432/ecommers_service
+    username: ecommers_service
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    baseline-on-migrate: true
+    baseline-version: 0
+    location: classpath:db/migration
+    enabled: true
+    user: ecommers_service
+    password: postgres
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
