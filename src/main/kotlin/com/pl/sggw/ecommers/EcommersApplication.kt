@@ -8,6 +8,4 @@ class EcommersApplication
 
 fun main(args: Array<String>) {
 	runApplication<EcommersApplication>(*args)
-
-
 }
