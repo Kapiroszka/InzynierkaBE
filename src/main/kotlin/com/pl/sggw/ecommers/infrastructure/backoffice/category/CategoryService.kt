@@ -8,7 +8,8 @@ class CategoryService {
 
     }
 
-    fun getCategoryTree(): CategoryTreeNode {
+    fun getCategoryTree(): CategoryTreeNode? {
+        return null
         //getAllCategories
         //sortByDepth
         //add to root or to some of children

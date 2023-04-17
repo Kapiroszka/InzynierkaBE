@@ -38,7 +38,7 @@ class CategoryController(val categoryService: CategoryService) {
         }
     }
     @GetMapping("/")
-    fun getCategoryTree() : CategoryTreeNode{
+    fun getCategoryTree() : CategoryTreeNode?{
         return categoryService.getCategoryTree()
     }
 
