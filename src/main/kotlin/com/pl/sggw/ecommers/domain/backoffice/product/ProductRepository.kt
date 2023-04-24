@@ -5,6 +5,7 @@ interface ProductRepository {
     fun updateProduct(product: Product)
     fun findProduct(productId: Long) :  Product?
     fun getNextProductId() : Long
+    fun updateStock(productId: Long, quantity: Long)
 
 
 }

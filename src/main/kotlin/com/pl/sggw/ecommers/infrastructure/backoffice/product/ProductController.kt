@@ -1,6 +1,7 @@
 package com.pl.sggw.ecommers.infrastructure.backoffice.product
 
 import com.pl.sggw.ecommers.domain.backoffice.product.Product
+import com.pl.sggw.ecommers.domain.backoffice.product.Stock
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.http.HttpStatus
@@ -19,6 +20,13 @@ class ProductController(private val productService: ProductService) {
     @ApiOperation("Add new product")
     fun upsertProduct(@RequestBody product: Product): ResponseEntity<Void> {
         productService.upsertProduct(product)
+        return ResponseEntity.ok().build()
+    }
+
+    @PostMapping("/add-stock")
+    @ApiOperation("Add new stock")
+    fun addStock(@RequestBody stock : Stock): ResponseEntity<Void>{
+        productService.addStock(stock)
         return ResponseEntity.ok().build()
     }
 
