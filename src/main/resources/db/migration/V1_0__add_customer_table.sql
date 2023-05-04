@@ -1,4 +1,4 @@
-CREATE TABLE tinder_user
+CREATE TABLE customer
 ( id bigint GENERATED ALWAYS AS IDENTITY primary key,
   user_email varchar(126) unique,
   password   varchar(100) NOT NULL,
