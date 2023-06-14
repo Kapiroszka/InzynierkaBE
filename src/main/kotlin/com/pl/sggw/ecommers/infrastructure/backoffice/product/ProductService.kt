@@ -19,10 +19,22 @@ class ProductService(
             productRepository.updateProduct(product)
         }
     }
-@Transactional
+
+    @Transactional
     fun addStock(stock: Stock) {
         stockRepository.addStock(stock)
-        productRepository.updateStock(stock.productId,stock.quantity)
+        productRepository.updateStock(stock.productId, stock.quantity)
+    }
+
+    @Transactional
+    fun removeProductFromStock(productId: Long, amount: Long): Boolean {
+        productRepository.findProduct(productId)?.let {
+            if (it.quantity < amount) {
+                return false
+            }
+            productRepository.decreaseStock(productId, amount)
+            return true
+        } ?: return false
 
     }
 

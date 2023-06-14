@@ -87,4 +87,11 @@ class JooqProductRepository(private val ctx: DSLContext) : ProductRepository {
             .where(PRODUCT.ID.eq(productId))
             .execute()
     }
+
+    override fun decreaseStock(productId: Long, quantity: Long) {
+        ctx.update(PRODUCT)
+            .set(PRODUCT.QUANTITY, PRODUCT.QUANTITY.sub(quantity))
+            .where(PRODUCT.ID.eq(productId))
+            .execute()
+    }
 }

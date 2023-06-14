@@ -73,7 +73,7 @@ open class CartProduct(
     /**
      * The column <code>public.cart_product.cart_id</code>.
      */
-    val CART_ID: TableField<CartProductRecord, Long?> = createField(DSL.name("cart_id"), SQLDataType.BIGINT.nullable(false), this, "")
+    val CART_ID: TableField<CartProductRecord, String?> = createField(DSL.name("cart_id"), SQLDataType.VARCHAR(36).nullable(false), this, "")
 
     /**
      * The column <code>public.cart_product.product_id</code>.
@@ -150,5 +150,5 @@ open class CartProduct(
     // -------------------------------------------------------------------------
     // Row6 type methods
     // -------------------------------------------------------------------------
-    override fun fieldsRow(): Row6<Long?, Long?, Long?, BigDecimal?, BigDecimal?, LocalDateTime?> = super.fieldsRow() as Row6<Long?, Long?, Long?, BigDecimal?, BigDecimal?, LocalDateTime?>
+    override fun fieldsRow(): Row6<Long?, String?, Long?, BigDecimal?, BigDecimal?, LocalDateTime?> = super.fieldsRow() as Row6<Long?, String?, Long?, BigDecimal?, BigDecimal?, LocalDateTime?>
 }

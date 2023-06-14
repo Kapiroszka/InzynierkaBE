@@ -7,5 +7,7 @@ interface ProductRepository {
     fun getNextProductId() : Long
     fun updateStock(productId: Long, quantity: Long)
 
+    fun decreaseStock(productId: Long,quantity: Long)
+
 
 }

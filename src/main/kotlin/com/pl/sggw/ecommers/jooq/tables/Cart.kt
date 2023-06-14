@@ -16,7 +16,6 @@ import kotlin.collections.List
 
 import org.jooq.Field
 import org.jooq.ForeignKey
-import org.jooq.Identity
 import org.jooq.Name
 import org.jooq.Record
 import org.jooq.Row4
@@ -67,7 +66,7 @@ open class Cart(
     /**
      * The column <code>public.cart.id</code>.
      */
-    val ID: TableField<CartRecord, Long?> = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "")
+    val ID: TableField<CartRecord, String?> = createField(DSL.name("id"), SQLDataType.VARCHAR(36).nullable(false), this, "")
 
     /**
      * The column <code>public.cart.customer_id</code>.
@@ -104,7 +103,6 @@ open class Cart(
 
     constructor(child: Table<out Record>, key: ForeignKey<out Record, CartRecord>): this(Internal.createPathAlias(child, key), child, key, CART, null)
     override fun getSchema(): Schema = Public.PUBLIC
-    override fun getIdentity(): Identity<CartRecord, Long?> = super.getIdentity() as Identity<CartRecord, Long?>
     override fun getPrimaryKey(): UniqueKey<CartRecord> = CART_PKEY
     override fun getKeys(): List<UniqueKey<CartRecord>> = listOf(CART_PKEY)
     override fun getReferences(): List<ForeignKey<CartRecord, *>> = listOf(CART__CART_CUSTOMER_ID_FKEY)
@@ -132,5 +130,5 @@ open class Cart(
     // -------------------------------------------------------------------------
     // Row4 type methods
     // -------------------------------------------------------------------------
-    override fun fieldsRow(): Row4<Long?, Long?, BigDecimal?, LocalDateTime?> = super.fieldsRow() as Row4<Long?, Long?, BigDecimal?, LocalDateTime?>
+    override fun fieldsRow(): Row4<String?, Long?, BigDecimal?, LocalDateTime?> = super.fieldsRow() as Row4<String?, Long?, BigDecimal?, LocalDateTime?>
 }

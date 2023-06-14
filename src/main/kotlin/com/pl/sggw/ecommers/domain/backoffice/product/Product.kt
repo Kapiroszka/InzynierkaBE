@@ -17,4 +17,8 @@ data class Product(
         return copy(productId = productId)
     }
 
+    fun getPrice() : BigDecimal{
+        return promotionalPrice ?: salePrice
+    }
+
 }
