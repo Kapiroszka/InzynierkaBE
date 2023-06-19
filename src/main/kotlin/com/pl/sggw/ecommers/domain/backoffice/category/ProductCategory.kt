@@ -13,4 +13,8 @@ data class ProductCategory(
         )
     }
 
+    fun getAncestorName(levelsFromRoot : Int) : String{
+        return level.take(levelsFromRoot).joinToString (separator = ".")
+    }
+
 }
