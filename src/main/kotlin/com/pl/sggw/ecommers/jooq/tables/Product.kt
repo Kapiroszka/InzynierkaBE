@@ -20,7 +20,7 @@ import org.jooq.ForeignKey
 import org.jooq.Identity
 import org.jooq.Name
 import org.jooq.Record
-import org.jooq.Row9
+import org.jooq.Row10
 import org.jooq.Schema
 import org.jooq.Table
 import org.jooq.TableField
@@ -101,6 +101,11 @@ open class Product(
     val QUANTITY: TableField<ProductRecord, BigDecimal?> = createField(DSL.name("quantity"), SQLDataType.NUMERIC.nullable(false), this, "")
 
     /**
+     * The column <code>public.product.image</code>.
+     */
+    val IMAGE: TableField<ProductRecord, ByteArray?> = createField(DSL.name("image"), SQLDataType.BLOB, this, "")
+
+    /**
      * The column <code>public.product.creation_timestamp</code>.
      */
     val CREATION_TIMESTAMP: TableField<ProductRecord, LocalDateTime?> = createField(DSL.name("creation_timestamp"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "")
@@ -156,7 +161,7 @@ open class Product(
     override fun rename(name: Name): Product = Product(name, null)
 
     // -------------------------------------------------------------------------
-    // Row9 type methods
+    // Row10 type methods
     // -------------------------------------------------------------------------
-    override fun fieldsRow(): Row9<Long?, String?, String?, String?, BigDecimal?, BigDecimal?, BigDecimal?, LocalDateTime?, LocalDateTime?> = super.fieldsRow() as Row9<Long?, String?, String?, String?, BigDecimal?, BigDecimal?, BigDecimal?, LocalDateTime?, LocalDateTime?>
+    override fun fieldsRow(): Row10<Long?, String?, String?, String?, BigDecimal?, BigDecimal?, BigDecimal?, ByteArray?, LocalDateTime?, LocalDateTime?> = super.fieldsRow() as Row10<Long?, String?, String?, String?, BigDecimal?, BigDecimal?, BigDecimal?, ByteArray?, LocalDateTime?, LocalDateTime?>
 }

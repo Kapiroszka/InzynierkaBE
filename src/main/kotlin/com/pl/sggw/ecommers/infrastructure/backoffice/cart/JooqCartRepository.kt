@@ -55,7 +55,8 @@ class JooqCartRepository(private val ctx: DSLContext) : CartRepository {
                     categoryId = r.getValue(PRODUCT.CATEGORY_ID) as String,
                     salePrice = r.getValue(CART_PRODUCT.PRICE_PER_ITEM) as BigDecimal,
                     promotionalPrice = r.getValue(CART_PRODUCT.PRICE_PER_ITEM) as BigDecimal,
-                    quantity = r.getValue(CART_PRODUCT.PRICE_PER_ITEM) as Int,
+                    image = null,
+                    quantity = (r.getValue(CART_PRODUCT.PRICE_PER_ITEM) as BigDecimal).toInt(),
                 )
             }
             .associateWith { it.quantity.toLong() }

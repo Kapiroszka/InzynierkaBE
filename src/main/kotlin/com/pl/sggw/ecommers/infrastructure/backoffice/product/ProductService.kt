@@ -6,6 +6,7 @@ import com.pl.sggw.ecommers.domain.backoffice.product.Stock
 import com.pl.sggw.ecommers.domain.backoffice.product.StockRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+
 @Service
 class ProductService(
     private val productRepository: ProductRepository,
@@ -43,4 +44,10 @@ class ProductService(
         return productRepository.getProductsFromCategory(categoryId)
     }
 
+    fun updatePhoto(productId: Long, image: ByteArray) {
+        productRepository.findProduct(productId)?.let {
+            productRepository.updateProduct(it.copy(image = image))
+        }
+
+    }
 }

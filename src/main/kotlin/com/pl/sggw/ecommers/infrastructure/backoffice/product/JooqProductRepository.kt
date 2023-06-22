@@ -24,6 +24,7 @@ class JooqProductRepository(private val ctx: DSLContext) : ProductRepository {
                 PRODUCT.SALE_PRICE,
                 PRODUCT.PROMOTIONAL_PRICE,
                 PRODUCT.QUANTITY,
+                PRODUCT.IMAGE,
                 PRODUCT.CREATION_TIMESTAMP,
                 PRODUCT.MODIFICATION_TIMESTAMP
             )
@@ -34,6 +35,7 @@ class JooqProductRepository(private val ctx: DSLContext) : ProductRepository {
                 product.salePrice,
                 product.promotionalPrice,
                 product.quantity.toBigDecimal(),
+                product.image,
                 OffsetDateTime.now().toLocalDateTime(),
                 OffsetDateTime.now().toLocalDateTime()
             )
@@ -49,6 +51,7 @@ class JooqProductRepository(private val ctx: DSLContext) : ProductRepository {
             .set(PRODUCT.SALE_PRICE, product.salePrice)
             .set(PRODUCT.PROMOTIONAL_PRICE, product.promotionalPrice)
             .set(PRODUCT.QUANTITY, product.quantity.toBigDecimal())
+            .set(PRODUCT.IMAGE, product.image)
             .set(PRODUCT.MODIFICATION_TIMESTAMP, OffsetDateTime.now().toLocalDateTime())
             .where(PRODUCT.ID.eq(product.productId))
             .execute()
@@ -65,10 +68,10 @@ class JooqProductRepository(private val ctx: DSLContext) : ProductRepository {
                     description = r.getValue(PRODUCT.DESCRIPTION) as String,
                     categoryId = r.getValue(PRODUCT.CATEGORY_ID) as String,
                     salePrice = r.getValue(PRODUCT.SALE_PRICE) as BigDecimal,
-                    promotionalPrice = r.getValue(PRODUCT.PROMOTIONAL_PRICE) as BigDecimal,
-                    quantity = r.getValue(PRODUCT.QUANTITY) as Int,
-
-                    )
+                    promotionalPrice = r.getValue(PRODUCT.PROMOTIONAL_PRICE),
+                    quantity = (r.getValue(PRODUCT.QUANTITY) as BigDecimal).toInt(),
+                    image = r.getValue(PRODUCT.IMAGE) as ByteArray?
+                )
             }
             .firstOrNull()
 
@@ -110,7 +113,8 @@ class JooqProductRepository(private val ctx: DSLContext) : ProductRepository {
                     categoryId = r.get(PRODUCT.CATEGORY_ID) as String,
                     salePrice = r.get(PRODUCT.SALE_PRICE) as BigDecimal,
                     promotionalPrice = r.get(PRODUCT.PROMOTIONAL_PRICE) as BigDecimal?,
-                    quantity = (r.get(PRODUCT.QUANTITY) as BigDecimal).toInt()
+                    quantity = (r.get(PRODUCT.QUANTITY) as BigDecimal).toInt(),
+                    image = r.getValue(PRODUCT.IMAGE) as ByteArray?
                 )
             }.toList()
     }

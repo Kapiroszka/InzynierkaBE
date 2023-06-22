@@ -6,6 +6,7 @@ create TABLE product
   sale_price decimal(18,2) NOT NULL,
   promotional_price decimal(18,2) NULL,
   quantity numeric NOT NULL,
+  image bytea NULL,
   creation_timestamp timestamp NOT NULL,
   modification_timestamp timestamp NOT NULL
 );
