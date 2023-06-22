@@ -2,6 +2,7 @@ package com.pl.sggw.ecommers.infrastructure.backoffice.product
 
 import com.pl.sggw.ecommers.domain.backoffice.product.Product
 import com.pl.sggw.ecommers.domain.backoffice.product.ProductRepository
+import com.pl.sggw.ecommers.jooq.tables.references.CATEGORY
 import com.pl.sggw.ecommers.jooq.tables.references.PRODUCT
 import org.jooq.DSLContext
 import org.jooq.impl.DSL.max
@@ -77,7 +78,7 @@ class JooqProductRepository(private val ctx: DSLContext) : ProductRepository {
     override fun getNextProductId(): Long {
         return (ctx.select(max(PRODUCT.ID))
             .from(PRODUCT)
-            .fetch { r -> r.get(0) as Long }
+            .fetch { r -> r.get(0) as Long? }
             .firstOrNull() ?: 0) + 1
     }
 
@@ -93,5 +94,24 @@ class JooqProductRepository(private val ctx: DSLContext) : ProductRepository {
             .set(PRODUCT.QUANTITY, PRODUCT.QUANTITY.sub(quantity))
             .where(PRODUCT.ID.eq(productId))
             .execute()
+    }
+
+    override fun getProductsFromCategory(categoryId: String): List<Product> {
+        return ctx.select()
+            .from(PRODUCT)
+            .join(CATEGORY)
+            .on(PRODUCT.CATEGORY_ID.eq(CATEGORY.TREEREPRESENTAION))
+            .where(CATEGORY.TREEREPRESENTAION.eq(categoryId))
+            .fetch { r ->
+                Product(
+                    productId = r.get(PRODUCT.ID) as Long,
+                    name = r.get(PRODUCT.NAME) as String,
+                    description = r.get(PRODUCT.DESCRIPTION) as String?,
+                    categoryId = r.get(PRODUCT.CATEGORY_ID) as String,
+                    salePrice = r.get(PRODUCT.SALE_PRICE) as BigDecimal,
+                    promotionalPrice = r.get(PRODUCT.PROMOTIONAL_PRICE) as BigDecimal?,
+                    quantity = (r.get(PRODUCT.QUANTITY) as BigDecimal).toInt()
+                )
+            }.toList()
     }
 }

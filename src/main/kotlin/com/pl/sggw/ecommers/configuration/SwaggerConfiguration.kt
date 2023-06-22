@@ -1,4 +1,4 @@
-package com.pl.sggw.tinder.configuration
+package com.pl.sggw.ecommers.configuration
 
 import org.springframework.boot.info.BuildProperties
 import org.springframework.context.annotation.Bean
@@ -24,7 +24,6 @@ class SwaggerConfiguration(private val buildProperties: BuildProperties) {
     fun api() = Docket(SWAGGER_2)
         .apiInfo(apiInfo())
         .select()
-        .apis(basePackage("com.pl.sggw.ecommers"))
         .build()
 
     @Bean

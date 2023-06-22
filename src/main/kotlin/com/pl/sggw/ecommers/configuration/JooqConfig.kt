@@ -1,4 +1,4 @@
-package com.pl.sggw.tinder.configuration
+package com.pl.sggw.ecommers.configuration
 
 import com.zaxxer.hikari.HikariDataSource
 import org.jooq.SQLDialect

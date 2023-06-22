@@ -1,4 +1,4 @@
-package com.pl.sggw.tinder.configuration
+package com.pl.sggw.ecommers.configuration
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule

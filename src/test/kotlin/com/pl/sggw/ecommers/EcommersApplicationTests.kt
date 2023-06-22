@@ -1,4 +1,4 @@
-package com.pl.sggw.tinder
+package com.pl.sggw.ecommers
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

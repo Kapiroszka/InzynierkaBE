@@ -4,8 +4,9 @@ import com.pl.sggw.ecommers.domain.backoffice.product.Product
 import com.pl.sggw.ecommers.domain.backoffice.product.ProductRepository
 import com.pl.sggw.ecommers.domain.backoffice.product.Stock
 import com.pl.sggw.ecommers.domain.backoffice.product.StockRepository
+import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-
+@Service
 class ProductService(
     private val productRepository: ProductRepository,
     private val stockRepository: StockRepository
@@ -36,6 +37,10 @@ class ProductService(
             return true
         } ?: return false
 
+    }
+
+    fun getProductsFromCategory(categoryId: String): List<Product> {
+        return productRepository.getProductsFromCategory(categoryId)
     }
 
 }

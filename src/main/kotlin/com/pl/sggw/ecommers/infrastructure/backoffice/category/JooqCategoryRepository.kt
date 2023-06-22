@@ -5,9 +5,13 @@ import com.pl.sggw.ecommers.domain.backoffice.category.CategoryRepository
 import com.pl.sggw.ecommers.domain.backoffice.category.ProductCategory
 import com.pl.sggw.ecommers.jooq.tables.references.CATEGORY
 import org.jooq.DSLContext
+import org.springframework.stereotype.Repository
+import org.springframework.transaction.annotation.Transactional
 import java.time.OffsetDateTime
 import java.time.ZonedDateTime
 
+@Repository
+@Transactional
 class JooqCategoryRepository(private val ctx: DSLContext) : CategoryRepository {
     override fun saveNewCategory(category: Category) {
         ctx.insertInto(CATEGORY)
